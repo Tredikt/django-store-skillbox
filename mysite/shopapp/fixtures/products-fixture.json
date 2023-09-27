@@ -1,0 +1,41 @@
+[
+  {
+    "model": "shopapp.product",
+    "pk": 4,
+    "fields": {
+      "name": "MSIa21",
+      "description": "Laptop",
+      "price": "500.00",
+      "discount": 5,
+      "created_at": "2023-02-26T06:08:53.109Z",
+      "archived": false,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 5,
+    "fields": {
+      "name": "Asus21",
+      "description": "Smartphone",
+      "price": "320.00",
+      "discount": 1,
+      "created_at": "2023-02-26T06:09:09.330Z",
+      "archived": false,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 3,
+    "fields": {
+      "name": "SumsungA34",
+      "description": "Smartphone",
+      "price": "200.00",
+      "discount": 4,
+      "created_at": "2023-02-26T06:16:13.729Z",
+      "archived": false,
+      "created_by": 2
+    }
+  }
+]

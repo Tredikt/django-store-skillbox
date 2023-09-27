@@ -1,0 +1,21 @@
+{% extends 'blogapp/base.html' %}
+
+
+{% block title %}
+    {{ object.title }}
+{% endblock %}
+
+
+{% block body %}
+    <h1>{{ object.title }}</h1>
+    <div>
+        <p>Published: {{ object.published_at }}</p>
+        <p>{{ object.body }}</p>
+    </div>
+
+    <div>
+        <a href="{% url 'blogapp:articles_video'%}">
+            Вернуться к статьям
+        </a>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "shopapp/base.html" %}
+{% load cache %}
+
+{% block title %}
+    Orders of user #{{ pk }}
+{% endblock %}
+
+
+{% block body %}
+    <h3>
+        User {{ username }} completed orders:
+    </h3>
+    <div>
+        {% cache 300 orders pk %}
+            {% if orders %}
+                <ol>
+                    {% for order in orders %}
+                    <li>
+
+                    <div>
+                        <p>Address: {{ order.delivery_address }}</p>
+                        <p>Promocode: {{ order.promocode }}</p>
+                        <p>User_id: {{ order.user.pk }}</p>
+                        <p>Products:
+                        {% if order.products.all %}
+                            <ul>
+                             {% for product in order.products.all %}
+                                <li>
+                                    {{ product.name }}
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            No products
+                        {% endif %}
+
+                    </div>
+                    <br>
+                    </li>
+                {% endfor %}
+
+                </ol>
+            {% else %}
+                <h3>User {{ username }} don't have orders yet</h3>
+
+            {% endif %}
+        {% endcache %}
+    </div>
+
+{% endblock %}
