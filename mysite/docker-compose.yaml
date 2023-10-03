@@ -4,29 +4,36 @@ services:
   app:
     build:
       dockerfile: ./Dockerfile
-    command: ["python", "manage.py", "runserver", "0.0.0.0:9000"]
-    # or
-    # - "python"
-    # - "manage.py"
-    # - "runserver"
+    command:
+      - "gunicorn"
+      - "mysite.wsgi:application"
+      - "--bind"
+      - "0.0.0.0:8000"
 
     ports:
-      - "8000:9000"
-
+      - "8000:8000"
+    restart: always
+    env_file:
+      - .env
     logging:
-      driver: loki
+      driver: "json-file" #loki
       options:
-        loki-url: http://host.docker.internal:3100/loki/api/v1/push
+        max-file: "10"
+        max-size: "200k"
+#        loki-url: http://host.docker.internal:3100/loki/api/v1/push
+#
+#  grafana:
+#    image: grafana/grafana:9.2.15
+#    environment:
+#      - "GF_AUTH_ANONYMOUS_ENABLED=true"
+#      - "GF_AUTH_ANONYMOUS_ORG_ROLE=Admin"
+#    ports:
+#      - "4000:4000"
+#
+#  loki:
+#    image: grafana/loki:2.8.0
+#    ports:
+#      - "4100:4100"
 
-  grafana:
-    image: grafana/grafana:9.2.15
-    environment:
-      - "GF_AUTH_ANONYMOUS_ENABLED=true"
-      - "GF_AUTH_ANONYMOUS_ORG_ROLE=Admin"
-    ports:
-      - "4000:4000"
-
-  loki:
-    image: grafana/loki:2.8.0
-    ports:
-      - "4100:4100"
+    volumes:
+      - "./mysite/database:/app/database"
