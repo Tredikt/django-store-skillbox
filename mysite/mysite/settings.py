@@ -257,8 +257,10 @@ logging.config.dictConfig(
             }
         },
         "handlers": {
-            "console": "logging.StreamHandler",
-            "formatter": "console",
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "console",
+            },
         },
         "loggers": {
             "": {
