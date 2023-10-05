@@ -4,12 +4,12 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
+RUN pip install --upgrade pip setuptools==57.5.0 pip "poetry==1.4.2"
 
-RUN pip install --upgrade pip setuptools==57.5.0
-RUN pip install -r requirements.txt
-RUN pip install gunicorn
-RUN pip install sentry_sdk
+RUN poetry config virtualenvs.create false --local
+COPY pyproject.toml .
+COPY poetry.lock .
+RUN poetry install
 
 COPY .. .
 
